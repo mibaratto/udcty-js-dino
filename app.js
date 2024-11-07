@@ -112,11 +112,7 @@ const chooseFact = (dino, human) => {
   }
 };
 
-const resultChooseFact = chooseFact(dinos[0], getHumanData);
-//console.log("resultChooseFact: " + resultChooseFact);
-
-// Generate Tiles for each Dino in Array
-const dinoTileGeneration = (dino, divToAppend) => {
+const dinoTileGeneration = (dino, human, divToAppend) => {
   const newTile = document.createElement("div");
   newTile.setAttribute("class", "grid-item");
 
@@ -128,9 +124,14 @@ const dinoTileGeneration = (dino, divToAppend) => {
   dinoImage.setAttribute("src", `${dino.imagem()}`);
   newTile.appendChild(dinoImage);
 
+  const dinoFact = document.createElement("p");
+  dinoFact.textContent = chooseFact(dino, human);
+  newTile.appendChild(dinoFact);
+
   divToAppend.appendChild(newTile);
 };
-//HUMAM TILES
+
+//HUMAN TILES
 function humanTileGeneration(human, divToAppend) {
   const newTile = document.createElement("div");
   newTile.setAttribute("class", "grid-item");
@@ -139,15 +140,20 @@ function humanTileGeneration(human, divToAppend) {
   humanName.textContent = `${human.userName}`;
   newTile.appendChild(humanName);
 
+  const humanImage = document.createElement("img");
+  humanImage.setAttribute("src", `./images/human.png`);
+  newTile.appendChild(humanImage);
+
   divToAppend.appendChild(newTile);
 }
+
 //adding human Obj(position 4) in array with dinos
-dinos.push(getHumanData);
-console.log(dinos);
-const temp = dinos[8];
-dinos[8] = dinos[4];
-dinos[4] = temp;
-console.log(dinos);
+// dinos.push(getHumanData);
+// console.log(dinos);
+// const temp = dinos[8];
+// dinos[8] = dinos[4];
+// dinos[4] = temp;
+// console.log(dinos);
 
 // Add tiles to DOM
 const addTiles = (dinos, human) => {
@@ -156,8 +162,7 @@ const addTiles = (dinos, human) => {
     if (i == 4) {
       humanTileGeneration(human, main);
     } else {
-      let newDino = dinos[i];
-      dinoTileGeneration(newDino, main);
+      dinoTileGeneration(dinos[i], human, main);
     }
   }
 };
@@ -172,8 +177,11 @@ const hideForm = () => {
 const formButton = document.querySelector("#btn");
 formButton.addEventListener("click", () => {
   const human = getHumanData();
-  hideForm();
-  addTiles(dinos, human);
+
+  // 4 dinos + human + 4 dinos
+  // const dinosAndHuman = dinos.slice......
+
+  addTiles(dinosAndHuman, human);
 });
 
 // *****************************************
