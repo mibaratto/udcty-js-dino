@@ -52,7 +52,8 @@ const getHumanData = () => {
 // Create Dino Compare Methods
 
 const compareWeigth = (dino, human) => {
-  const comparison = dino.weight / human.userWeight;
+  const dinosWeightInKilos = Number(dino.weight * 0, 453592);
+  const comparison = dinosWeightInKilos / human.userWeight;
   return `The ${dino.species} was ${comparison.toFixed(1)} heavier than you.`;
 };
 
@@ -111,7 +112,7 @@ const chooseFact = (dino, human) => {
       break;
   }
 };
-
+//DINOS TILES
 const dinoTileGeneration = (dino, human, divToAppend) => {
   const newTile = document.createElement("div");
   newTile.setAttribute("class", "grid-item");
@@ -147,13 +148,33 @@ function humanTileGeneration(human, divToAppend) {
   divToAppend.appendChild(newTile);
 }
 
+// PIGEON TILES
+function pigeonTileGeneration(dino, divToAppend) {
+  const newTile = document.createElement("div");
+  newTile.setAttribute("class", "grid-item");
+
+  const dinoSpecies = document.createElement("h3");
+  dinoSpecies.textContent = `${dino.species}`;
+  newTile.appendChild(dinoSpecies);
+
+  const dinoImage = document.createElement("img");
+  dinoImage.setAttribute("src", `${dino.imagem()}`);
+  newTile.appendChild(dinoImage);
+
+  const dinoFact = document.createElement("p");
+  dinoFact.textContent = `${dino.fact}`;
+  newTile.appendChild(dinoFact);
+
+  divToAppend.appendChild(newTile);
+}
+
 //adding human Obj(position 4) in array with dinos
-// dinos.push(getHumanData);
-// console.log(dinos);
-// const temp = dinos[8];
-// dinos[8] = dinos[4];
-// dinos[4] = temp;
-// console.log(dinos);
+dinos.push(getHumanData);
+console.log(dinos);
+const temp = dinos[8];
+dinos[8] = dinos[4];
+dinos[4] = temp;
+console.log(dinos);
 
 // Add tiles to DOM
 const addTiles = (dinos, human) => {
@@ -161,6 +182,8 @@ const addTiles = (dinos, human) => {
   for (let i = 0; i < dinos.length; i++) {
     if (i == 4) {
       humanTileGeneration(human, main);
+    } else if (i == 7) {
+      pigeonTileGeneration(dinos[i], main);
     } else {
       dinoTileGeneration(dinos[i], human, main);
     }
@@ -177,24 +200,6 @@ const hideForm = () => {
 const formButton = document.querySelector("#btn");
 formButton.addEventListener("click", () => {
   const human = getHumanData();
-
-  // 4 dinos + human + 4 dinos
-  // const dinosAndHuman = dinos.slice......
-
-  addTiles(dinosAndHuman, human);
+  hideForm();
+  addTiles(dinos, human);
 });
-
-// *****************************************
-// para cada dino:
-
-// numero aleatorio de 0 a 5
-// array[numero] // altura
-
-// if (propriedade === altura) {
-//   fato = metodoDeALtura(dino, humano)
-// } else if (aaga  === peso) {
-//   fato = metodoDePeso(dino, humano)
-// } else if ( === local) {
-//   fato = metodoLocal(dino)
-// }
-// renderizar -> fato // frase na tela
