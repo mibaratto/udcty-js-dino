@@ -28,37 +28,36 @@
     <!-- Form to get user input -->
     <form id="dino-compare">
       <div class="form-container">
-        <label for="name">Name:</label>
-        <input id="name" class="form-field__full" type="text" name="name" />
-        <p>Height</p>
-        <label
-          >Feet:
-          <input id="feet" class="form-field__short" type="number" name="feet"
-        /></label>
-        <label
-          >inches:
-          <input
-            id="inches"
-            class="form-field__short"
-            type="number"
-            name="inches"
-        /></label>
-        <p>Weight:</p>
-        <label
-          ><input
-            id="weight"
-            class="form-field__full"
-            type="number"
-            name="weight"
-          />kg</label
-        >
-        <p>Diet:</p>
-        <select id="diet" class="form-field__full" name="diet">
-          <option value="omnivor">Omnivor</option>
-          <option value="herbavor">Herbavor</option>
-          <option value="carnivor">Carnivor</option>
-        </select>
-
+        <div>
+          <label for="name"><p>Name</p></label>
+          <input id="name" class="form-field__full" type="text" name="name" />
+        </div>
+        <div class="test">
+          <p>Height <span class="unit-text">inches</span></p>
+          <label>
+            <input
+              id="height"
+              class="form-field__full"
+              type="number"
+              name="height"
+          /></label>
+          <p>Weight<span class="unit-text">pounds</span></p>
+          <label
+            ><input
+              id="weight"
+              class="form-field__full"
+              type="number"
+              name="weight"
+          /></label>
+        </div>
+        <div>
+          <p>Diet</p>
+          <select id="diet" class="form-field__full" name="diet">
+            <option value="omnivor">Omnivor</option>
+            <option value="herbavor">Herbavor</option>
+            <option value="carnivor">Carnivor</option>
+          </select>
+        </div>
         <div id="btn">Compare Me!</div>
       </div>
     </form>

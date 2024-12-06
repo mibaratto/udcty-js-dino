@@ -2,7 +2,7 @@ import DINOS from "./dino.js";
 
 const dinosData = DINOS.Dinos;
 
-// Create Dino Constructor
+// Dino Constructor
 function Dinossauro(species, weight, height, diet, where, when, fact) {
   this.species = species;
   this.weight = weight;
@@ -30,6 +30,7 @@ const dinos = dinosData.map((dino) => {
   return newDinoObj;
 });
 
+// Human constructor
 function Human(userName, userHeight, userWeight, userDiet) {
   this.userName = userName;
   this.userHeight = userHeight;
@@ -37,23 +38,19 @@ function Human(userName, userHeight, userWeight, userDiet) {
   this.userDiet = userDiet;
 }
 
-// Use IIFE to get human data from form
-
+// Get human data from form
 const getHumanData = () => {
   const userName = document.querySelector("#name").value;
-  const userHeight = document.querySelector("#feet").value;
+  const userHeight = document.querySelector("#height").value;
   const userWeight = document.querySelector("#weight").value;
   const userDiet = document.querySelector("#diet").value;
   const userHumam = new Human(userName, userHeight, userWeight, userDiet);
-  console.log(userHumam);
   return userHumam;
 };
 
 // Create Dino Compare Methods
-
 const compareWeigth = (dino, human) => {
-  const dinosWeightInKilos = Number(dino.weight * 0, 453592);
-  const comparison = dinosWeightInKilos / human.userWeight;
+  const comparison = dino.weight / human.userWeight;
   return `The ${dino.species} was ${comparison.toFixed(1)} heavier than you.`;
 };
 
@@ -112,7 +109,8 @@ const chooseFact = (dino, human) => {
       break;
   }
 };
-//DINOS TILES
+
+//Generate dinos tiles
 const dinoTileGeneration = (dino, human, divToAppend) => {
   const newTile = document.createElement("div");
   newTile.setAttribute("class", "grid-item");
@@ -132,8 +130,8 @@ const dinoTileGeneration = (dino, human, divToAppend) => {
   divToAppend.appendChild(newTile);
 };
 
-//HUMAN TILES
-function humanTileGeneration(human, divToAppend) {
+//Generate human tiles
+const humanTileGeneration = (human, divToAppend) => {
   const newTile = document.createElement("div");
   newTile.setAttribute("class", "grid-item");
 
@@ -146,10 +144,10 @@ function humanTileGeneration(human, divToAppend) {
   newTile.appendChild(humanImage);
 
   divToAppend.appendChild(newTile);
-}
+};
 
-// PIGEON TILES
-function pigeonTileGeneration(dino, divToAppend) {
+//Generate pigeon tiles
+const pigeonTileGeneration = (dino, divToAppend) => {
   const newTile = document.createElement("div");
   newTile.setAttribute("class", "grid-item");
 
@@ -166,23 +164,18 @@ function pigeonTileGeneration(dino, divToAppend) {
   newTile.appendChild(dinoFact);
 
   divToAppend.appendChild(newTile);
-}
-
-//adding human Obj(position 4) in array with dinos
-dinos.push(getHumanData);
-console.log(dinos);
-const temp = dinos[8];
-dinos[8] = dinos[4];
-dinos[4] = temp;
-console.log(dinos);
+};
 
 // Add tiles to DOM
 const addTiles = (dinos, human) => {
+  dinos.splice(4, 0, human); // include human in dinos array
+
   const main = document.querySelector("#grid");
+
   for (let i = 0; i < dinos.length; i++) {
-    if (i == 4) {
-      humanTileGeneration(human, main);
-    } else if (i == 7) {
+    if (i === 4) {
+      humanTileGeneration(dinos[i], main);
+    } else if (i === 8) {
       pigeonTileGeneration(dinos[i], main);
     } else {
       dinoTileGeneration(dinos[i], human, main);
